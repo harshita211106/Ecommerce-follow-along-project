@@ -47,27 +47,43 @@ router.post("/create-user", upload.single("file"), catchAsyncErrors(async (req, 
     res.status(201).json({ success: true, user });
 }));
 
+
 router.post("/login", catchAsyncErrors(async (req, res, next) => {
-    console.log("Logging in user...");
-    const { email, password } = req.body;
-    if (!email || !password) {
-        return next(new ErrorHandler("Please provide email and password", 400));
+    try{
+        console.log("Logging in user...");
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            throw new ErrorHandler("Please provide email and password", 400);
+        }
+
+        const user = await User.findOne({ email }).select("+password");
+
+        if (!user) {
+            throw new ErrorHandler("Invalid Email or Password", 401);
+        }
+
+
+        const isPasswordMatched = await bcrypt.compare(password, user.password, function(err, result) {
+            if(err){
+                console.log("error in compare")
+            }
+            res.status(200).json({
+                success: true,
+                user,
+            });
+           
+        });
+
+    
+
+        
+    } catch (error) {
+        console.log("error in login",error)
     }
-    const user = await User.findOne({ email }).select("+password");
-    if (!user) {
-        return next(new ErrorHandler("Invalid Email or Password", 401));
-    }
-    const isPasswordMatched = await bcrypt.compare(password, user.password);
-    console.log("At Auth", "Password: ", password, "Hash: ", user.password);
-    if (!isPasswordMatched) {
-        return next(new ErrorHandler("Invalid Email or Password", 401));
-    }
-    user.password = undefined;
-    res.status(200).json({
-        success: true,
-        user,
-    });
-}));
+}))
+
+
 
 router.get("/profile", catchAsyncErrors(async (req, res, next) => {
     const { email } = req.query;
@@ -117,6 +133,22 @@ router.post("/add-address", catchAsyncErrors(async (req, res, next) => {
         addresses: user.addresses,
     });
 }));
+
+router.get("/addresses", catchAsyncErrors(async (req, res, next) => {
+    const { email } = req.query;
+    if (!email) {
+        return next(new ErrorHandler("Please provide an email", 400));
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+    res.status(200).json({
+        success: true,
+        addresses: user.addresses,
+    });
+}
+));
 
 
 
