@@ -488,3 +488,8 @@ Display all the user orders
 We will add my-orders page in navbar for better navigation.
 
 Created a My Orders page that sends a GET request to the my-orders endpoint created in the previous milestone. The user's email is sent to the endpoint to retrieve all their orders, which are then displayed on the page. Additionally, added the My Orders page to the navbar for improved navigation.
+
+
+# Milestone 28: Cancel Order Feature
+
+In this milestone, we added a Cancel Order button in the my-orders page and created a backend endpoint to handle order cancellations. The button is only visible for active orders. The backend receives the order-id, retrieves the order, updates its status to canceled, and saves the changes. The frontend and backend are now connected, allowing seamless order cancellations. All code changes have been pushed to GitHub, and the repository link has been submitted
