@@ -493,3 +493,7 @@ Created a My Orders page that sends a GET request to the my-orders endpoint crea
 # Milestone 28: Cancel Order Feature
 
 In this milestone, we added a Cancel Order button in the my-orders page and created a backend endpoint to handle order cancellations. The button is only visible for active orders. The backend receives the order-id, retrieves the order, updates its status to canceled, and saves the changes. The frontend and backend are now connected, allowing seamless order cancellations. All code changes have been pushed to GitHub, and the repository link has been submitted
+
+# Milestone 29: PayPal Payment Integration
+
+In this milestone, we set up the foundation for integrating PayPal online payments into our application. We created a PayPal developer account, generated sandbox credentials, and saved the client ID. On the order confirmation page, we added radio buttons for payment selection—Cash on Delivery (COD) and Online Payment. Selecting online payment will display PayPal buttons, which we will implement in the next milestone. All code changes have been pushed to GitHub, and the repository link has been submitted.
