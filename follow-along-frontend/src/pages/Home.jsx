@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
-// react-app/src/pages/Home.js
 
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 import Nav from "../components/nav";
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // For loading state
