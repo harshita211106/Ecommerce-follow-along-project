@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import AddressCard from "../components/AddressCard";
 import Nav from "../components/nav";
 import { useNavigate } from "react-router-dom";
+
 export default function Profile() {
 	const [personalDetails, setPersonalDetails] = useState({
 		name: "",

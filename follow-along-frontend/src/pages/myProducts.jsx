@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Myproduct from "../components/myproduct"; // <-- Import the Product component
 import Nav from "../components/nav";
+
 export default function MyProducts() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
