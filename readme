@@ -518,3 +518,27 @@ Responsive Design: Used CSS Flexbox and media queries to ensure adaptability acr
 
 # For Milestone 31:
  We implemented global state management using Redux. The goal is to manage the user email across the application using a Redux store. we started by installing the react-redux package, and then created a store folder with two files: store.js, which configured the Redux store and handle the user email state via a userReducer function, and userActions.js, which defined the setEmail action to updated the email in the global state. 
+
+# Milestone 32:
+Enhancing Global State Management with Redux
+In this milestone, we extended our Redux implementation to store and access user email across all pages, ensuring a smooth user experience.
+
+Key Steps:
+
+Setting Up Redux for Global State Management
+
+Installed the redux and react-redux packages.
+Created a store folder containing:
+store.js: Configured Redux with userReducer to handle global email state.
+userSlice.js: Defined a setEmail action to update the email globally.
+Integrating Redux with the React Application
+
+Wrapped the App component with Provider in index.js to ensure global access to the Redux store.
+Storing Email in Global State (Login Page)
+
+Used the useDispatch hook to store the user email in global state when logging in.
+Updated the email state using dispatch(setEmail(email)) inside the handleLogin function.
+Accessing Global State Across Pages
+
+Used useSelector in all pages to retrieve the stored email from Redux.
+Ensured that the email persists throughout different components and pages.

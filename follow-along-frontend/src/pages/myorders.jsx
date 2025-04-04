@@ -2,19 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from '../components/nav'
+import { useSelector } from 'react-redux'; // Import useSelector
+
 
 const MyOrdersPage = () => {
     const [orders, setOrders] = useState([]);
-    const defaultEmail = 'harshitabhingare21@gmail.com';
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const email = useSelector((state) => state.user.email);
+
 
     const fetchOrders = async () => {
         try {
             setLoading(true);
             setError('');
             const response = await axios.get('http://localhost:8008/api/v2/orders/myorders', {
-                params: { email: defaultEmail },
+                params: { email},
             });
             setOrders(response.data.orders);
         } catch (err) {
