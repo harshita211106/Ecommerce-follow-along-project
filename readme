@@ -542,3 +542,19 @@ Accessing Global State Across Pages
 
 Used useSelector in all pages to retrieve the stored email from Redux.
 Ensured that the email persists throughout different components and pages.
+
+# Milestone 33 :
+JWT Token Creation & Cookie Storage
+##  What I Learned
+
+- How to install and use the `jsonwebtoken` package.
+- How to generate a JWT token using the `sign()` method with email and user ID.
+- How to set cookie options like `maxAge` and `httpOnly`.
+- How to send the token to the client and store it inside a cookie in the browser.
+
+---
+## Steps Implemented
+
+1. **Installed the `jsonwebtoken` package:**
+   ```bash
+   npm install jsonwebtoken
