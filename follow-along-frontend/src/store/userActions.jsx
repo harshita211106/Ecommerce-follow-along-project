@@ -1,7 +1,10 @@
-import { setEmail } from "./store";
 
 
-// Action creator to set user email
-export const setUserEmail = (email) => (dispatch) => {
-  dispatch(setEmail(email));
-};
+// userActions.js
+export const setemail = (email) => ({
+  type: 'SET_EMAIL',
+  payload: email,
+});
+
+
+

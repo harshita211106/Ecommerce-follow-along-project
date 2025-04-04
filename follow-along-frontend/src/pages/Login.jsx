@@ -1,29 +1,44 @@
+
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import styles from "../styles/styles"; // Ensure this file has 'normalFlex' key
+import styles from "../styles/styles";
+
 import axios from "axios";
-import { setUserEmail } from "../store/userActions";
 import { useDispatch } from "react-redux";
+import { setemail } from "../store/userActions";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
+
+
+
+// Ensure axios sends cookies with requests
+axios.defaults.withCredentials = true;
+
+
+
 
 const Login = () => {
-  const dispatch=useDispatch()
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize navigate
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email)
     try {
       const response = await axios.post("http://localhost:8008/api/v2/user/login", { email, password });
-      dispatch(setUserEmail(email))
       console.log(response.data);
-      alert("Success")
+      // Dispatch action to store email in Redux state
+      dispatch(setemail(email));
+      // Redirect to profile page after successful login
+      navigate("/");
     } catch (error) {
       console.error("There was an error logging in!", error);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -51,6 +66,7 @@ const Login = () => {
                 />
               </div>
             </div>
+
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -82,8 +98,9 @@ const Login = () => {
               </div>
             </div>
 
-            <div className={`${styles?.normalFlex || "flex items-center justify-between"}`}>
-              <div className="flex items-center">
+
+            <div className={`${styles.noramlFlex} justify-between`}>
+              <div className={`${styles.noramlFlex}`}>
                 <input
                   type="checkbox"
                   name="remember-me"
@@ -95,11 +112,15 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-sm">
-                <a href=".forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
+                <a
+                  href=".forgot-password"
+                  className="font-medium text-blue-600 hover:text-blue-500"
+                >
                   Forgot your password?
                 </a>
               </div>
             </div>
+
 
             <div>
               <button
@@ -110,8 +131,9 @@ const Login = () => {
               </button>
             </div>
 
-            <div className={`${styles?.normalFlex || "flex justify-center items-center w-full"}`}>
-              <h4>Not have an account?</h4>
+
+            <div className={`${styles.noramlFlex} w-full`}>
+              <h4>Not have any account?</h4>
             </div>
           </form>
         </div>
@@ -120,4 +142,6 @@ const Login = () => {
   );
 };
 
+
 export default Login;
+
